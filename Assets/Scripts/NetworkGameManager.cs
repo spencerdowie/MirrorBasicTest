@@ -1,4 +1,6 @@
 using Mirror;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +13,11 @@ public class NetworkGameManager : NetworkBehaviour
     [SerializeField]
     private Transform laserHolder;
     [SerializeField]
-    private GameObject projectilePrefab;
-    [SerializeField]
-    private GameObject[] lasers;
-    private int spawnedLaserCount = 0;
+    private GameObject[] bolts = new GameObject[10];
+    [SerializeField, SyncVar]
+    private int[] playerAmmo;
+
+    private int tempCount = 0;
 
     [Server]
     public void SetupGame(bool teams, int lives, bool gamemode)
@@ -23,20 +26,39 @@ public class NetworkGameManager : NetworkBehaviour
         numLives = lives;
         isLives = gamemode;
 
+        playerAmmo = new int[2];//numplayers
+        for (int i = 0; i < 2; i++)
+        {
+            playerAmmo[i] = 3;
+        }
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(StartGame());
+    }
+
+    //Workaround for mirror auto-enabling netIdents on load
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForEndOfFrame();
+        foreach (GameObject bolt in bolts)
+        {
+            bolt.SetActive(false);
+        }
+
     }
 
     [ClientRpc]
     public void SpawnProjectile(int playerIndex, Vector3 wPos, Quaternion wRot)
     {
-        if (spawnedLaserCount < lasers.Length)
-        {
-            lasers[spawnedLaserCount].SetActive(true);
-            lasers[spawnedLaserCount].transform.SetPositionAndRotation(wPos, wRot);
-            Bolt bolt = lasers[spawnedLaserCount].GetComponent<Bolt>();
-            bolt.FireLaser(playerIndex, isServer ? this : null);
-            spawnedLaserCount++;
-        }
+        Bolt bolt = bolts[tempCount].GetComponent<Bolt>();
+        bolt.gameObject.SetActive(true);
+        bolt.transform.SetPositionAndRotation(wPos, wRot);
+        bolt.FireLaser(playerIndex, isServer ? this : null);
+        tempCount++;
     }
+
 
     [ClientRpc]
     public void AddPlayer(NetworkIdentity identity)

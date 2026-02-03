@@ -69,5 +69,5 @@ MonoBehaviour:
   numLives: 3
   isLives: 1
   laserHolder: {fileID: 0}
-  projectilePrefab: {fileID: 5890560936853567077, guid: b7dd46dbf38c643f09e206f9fa4be008, type: 3}
+  projectilePrefab: {fileID: 7177247423102359009, guid: 89d6ecefee6b0a6498d0e0c8a08a34e1, type: 3}
   lasers: []

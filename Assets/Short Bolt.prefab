@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &793700828123401235
 Transform:
   m_ObjectHideFlags: 0
@@ -241,6 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60300f6569e074b4a8ee5d120d2537db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   laserPoint: {fileID: 2576389404796319276}
   hitboxPrefab: {fileID: 8387655218772060406, guid: 0eaaccae54ec98c40b83dbd67103350b, type: 3}
   <LaserSpeed>k__BackingField: 7
@@ -264,7 +267,7 @@ MonoBehaviour:
   sceneId: 0
   _assetId: 2858834108
   serverOnly: 0
-  visibility: 0
+  visibility: 1
   hasSpawned: 0
 --- !u!114 &-5983517968829300213
 MonoBehaviour:

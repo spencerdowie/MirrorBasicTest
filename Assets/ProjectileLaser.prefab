@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 24373266488650541}
   - component: {fileID: 2355290524794870353}
   - component: {fileID: 7830965621679893272}
+  - component: {fileID: 3077699284525210248}
+  - component: {fileID: 4857302065803526698}
   m_Layer: 0
   m_Name: ProjectileLaser
   m_TagString: Untagged
@@ -155,5 +157,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b22fb70d7805948a3b7c8d7d0e41c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   laserSectionPrefab: {fileID: 7987171534190262222, guid: fec180c0d2c9a064596ea5b319c795e7, type: 3}
   pID: -1
+--- !u!114 &3077699284525210248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890560936853567077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2488045781
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &4857302065803526698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890560936853567077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 24373266488650541}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 1
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  useFixedUpdate: 0
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01

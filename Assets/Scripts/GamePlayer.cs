@@ -62,6 +62,12 @@ public class GamePlayer : NetworkBehaviour
         if (isLocalPlayer)
         {
             Move();
+#if UNITY_EDITOR
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                FireBolt();
+            }
+#endif
         }
     }
 
