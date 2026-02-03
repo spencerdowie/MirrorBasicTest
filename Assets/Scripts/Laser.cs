@@ -149,8 +149,6 @@ public class Laser : NetworkBehaviour
     }
 
 
-
-    [Server]
     public void DestroyLaser()
     {
         returnAmmo?.Invoke();
