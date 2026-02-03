@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class NetPlayerManager : NetworkManager
 {
-    public GameObject gameManagerPrefab;
     [SerializeField]
     private NetworkGameManager gameManager;
 
-    public static Action PlayerAdded;
+    public static Action<NetworkIdentity> PlayerAdded;
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        gameManager = Instantiate(gameManagerPrefab).GetComponent<NetworkGameManager>();
+        //NetworkServer.Spawn(gameManager.gameObject);
+        gameManager = FindAnyObjectByType<NetworkGameManager>(FindObjectsInactive.Include);
         gameManager.SetupGame(false, 4, true);
 
-        NetworkServer.Spawn(gameManager.gameObject);
-
-        PlayerAdded += gameManager.CreateLaserPool;
+        PlayerAdded += gameManager.AddPlayer;
     }
 
     public override void OnStopServer()
     {
-        PlayerAdded -= gameManager.CreateLaserPool;
+        PlayerAdded -= gameManager.AddPlayer;
         base.OnStopServer();
     }
 
@@ -31,7 +29,7 @@ public class NetPlayerManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
-        PlayerAdded?.Invoke();
+        PlayerAdded?.Invoke(conn.identity);
         conn.identity.name = "Player " + numPlayers;
     }
 }

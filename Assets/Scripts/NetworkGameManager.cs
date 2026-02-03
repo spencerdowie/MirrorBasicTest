@@ -25,36 +25,22 @@ public class NetworkGameManager : NetworkBehaviour
 
     }
 
-    private void Update()
-    {
-        if (authority)
-        {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                //SpawnProjectile();
-            }
-        }
-    }
-
     [ClientRpc]
-    public void SpawnProjectile()
+    public void SpawnProjectile(int playerIndex, Vector3 wPos, Quaternion wRot)
     {
         if (spawnedLaserCount < lasers.Length)
         {
             lasers[spawnedLaserCount].SetActive(true);
+            lasers[spawnedLaserCount].transform.SetPositionAndRotation(wPos, wRot);
             Bolt bolt = lasers[spawnedLaserCount].GetComponent<Bolt>();
-            if (isServer)
-            {
-                bolt.isServer = true;
-            }
-            bolt.FireLaser(2);
+            bolt.FireLaser(playerIndex, isServer ? this : null);
             spawnedLaserCount++;
         }
     }
 
     [ClientRpc]
-    public void CreateLaserPool()
+    public void AddPlayer(NetworkIdentity identity)
     {
-        Debug.Log("Create Pool");
+        identity.GetComponent<GamePlayer>().gameManager = this;
     }
 }

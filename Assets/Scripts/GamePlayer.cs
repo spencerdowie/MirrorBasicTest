@@ -21,7 +21,7 @@ public class GamePlayer : NetworkBehaviour
     [SerializeField]
     private Transform laserSpawn;
 
-    [SyncVar(hook = nameof(AmmoChanged))]
+    [SyncVar]
     private int ammo = 3;
     private int hitLayer;
     [SyncVar]
@@ -32,6 +32,9 @@ public class GamePlayer : NetworkBehaviour
     public int TeamID = 0;
     [SyncVar]
     public int PlayerColourIndex = 0;
+
+    [SerializeField]
+    public NetworkGameManager gameManager;
 
     public void AmmoChanged(int oldAmmoCount, int newAmmoCount) { }
 
@@ -45,6 +48,7 @@ public class GamePlayer : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+
         //Debug.Log("Start Client");
         if (!isLocalPlayer)
         {
@@ -53,24 +57,22 @@ public class GamePlayer : NetworkBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         if (isLocalPlayer)
         {
             Move();
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                FireBolt();
-            }
         }
     }
 
     [Command]
     public void FireBolt()
     {
-        FindFirstObjectByType<NetworkGameManager>().SpawnProjectile();
-
+        if (ammo > 0)
+        {
+            gameManager.SpawnProjectile(PlayerIndex, transform.position, transform.rotation);
+            ammo--;
+        }
     }
 
     public void Move()
@@ -116,7 +118,7 @@ public class GamePlayer : NetworkBehaviour
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
-        CMDFire();
+        FireBolt();
     }
 
     [Command]
