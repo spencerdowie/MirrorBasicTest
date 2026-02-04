@@ -49,12 +49,21 @@ public class GamePlayer : NetworkBehaviour
     {
         base.OnStartClient();
 
+        hitLayer = LayerMask.NameToLayer("");
         //Debug.Log("Start Client");
         if (!isLocalPlayer)
         {
             Destroy(playerInput);
             playerInput = null;
         }
+    }
+
+    public void Setup(NetworkGameManager gameManager, int playerID)
+    {
+        this.gameManager = gameManager;
+        PlayerIndex = playerID;
+        hitLayer = LayerMask.NameToLayer("Player" + playerID);
+        gameObject.layer = hitLayer;
     }
 
     private void FixedUpdate()

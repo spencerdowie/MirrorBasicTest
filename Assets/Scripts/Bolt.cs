@@ -16,7 +16,7 @@ public class Bolt : NetworkBehaviour
     public int PlayerIndex { get; private set; } = -1;
     private int hitLayer = -1;
 
-    const float LaserHeight = 0.4f;
+    const float LaserHeight = 1.25f;
     [field: SerializeField]
     public float LaserSpeed { get; private set; } = 6f;
     [field: SerializeField]
@@ -37,6 +37,8 @@ public class Bolt : NetworkBehaviour
     {
         PlayerIndex = playerID;
         this.gameManager = gameManager;
+        hitLayer = LayerMask.NameToLayer("Player" + playerID);
+        gameObject.layer = hitLayer;
 
         var points = CreatePoints();
         StartCoroutine(MoveLaser(points));

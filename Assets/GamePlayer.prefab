@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4669699747789576762}
   - component: {fileID: 1472223817276133593}
   - component: {fileID: 5348706067552879587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7048034265872223322}
   - component: {fileID: 1421266426475127591}
   - component: {fileID: 9025473031180780169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4906011849197563728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaserSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: -3581893226334475412}
   - component: {fileID: -546057167655768413}
   - component: {fileID: -7822889936094239232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GamePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,6 +18,7 @@ public class NetworkGameManager : NetworkBehaviour
     private int[] playerAmmo;
 
     private int tempCount = 0;
+    private int playerCount = 0;
 
     [Server]
     public void SetupGame(bool teams, int lives, bool gamemode)
@@ -63,6 +64,7 @@ public class NetworkGameManager : NetworkBehaviour
     [ClientRpc]
     public void AddPlayer(NetworkIdentity identity)
     {
-        identity.GetComponent<GamePlayer>().gameManager = this;
+        identity.GetComponent<GamePlayer>().Setup(this, playerCount);
+        playerCount++;
     }
 }
